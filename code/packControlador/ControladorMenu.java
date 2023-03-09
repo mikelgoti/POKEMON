@@ -16,41 +16,22 @@ public class ControladorMenu {
     private static ModeloMenu modeloMenu;
 
     /**
-     * Elementos de la interfaz grafica
-     * */
-    private JLabel labelJugadores;
-    private JTextField textNumJugadores;
-    private JLabel labelBots;
-    private JTextField  textNumBots;
-    private JLabel labelPokemons;
-    private JTextField  textNumPokemons;
-    private JButton botonInicio;
-
-    /**
      * CONSTRUCTOR DEL CONTROLADOR PARA EL MENU
      * */
     public ControladorMenu() {
         this.vistaMenu = VistaMenu.getVistaMenu();
         this.modeloMenu = ModeloMenu.getMiModeloMenu();
 
-        this.labelJugadores = vistaMenu.getLabelJugadores();
-        this.textNumJugadores = vistaMenu.getTextNumJugadores();
-        this.labelBots = vistaMenu.getLabelBots();
-        this.textNumBots = vistaMenu.getTextNumBots();
-        this.labelPokemons = vistaMenu.getLabelPokemons();
-        this.textNumPokemons = vistaMenu.getTextNumPokemons();
-        this.botonInicio = vistaMenu.getBotonInicio();
-
-           botonInicio.addActionListener(new ActionListener() {
+           vistaMenu.getBotonInicio().addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     /*System.out.printf("Jugadores: %s\n" +
                             "Bots: %s\n" +
                             "Pokemons: %s",j,b,p);*/
                     ModeloMenu menu = ModeloMenu.getMiModeloMenu();
-                    menu.setNumJugadores(textNumJugadores.getText());
-                    menu.setNumBots(textNumBots.getText());
-                    menu.setNumPokemons(textNumPokemons.getText());
+                    menu.setNumJugadores(vistaMenu.getTextNumJugadores().getText());
+                    menu.setNumBots(vistaMenu.getTextNumBots().getText());
+                    menu.setNumPokemons(vistaMenu.getTextNumPokemons().getText());
                     menu.comprobarInputs();
                 }
             });

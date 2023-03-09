@@ -10,7 +10,7 @@ import java.util.Observer;
 
 public class VistaMenu extends JFrame implements Observer {
 
-    private static ControladorMenu controladorMenu = null;
+    //private static ControladorMenu controladorMenu = null;
     private static VistaMenu vistaMenu = null;
 
     private JTextArea titulo;
@@ -22,10 +22,6 @@ public class VistaMenu extends JFrame implements Observer {
     private JTextField  textNumPokemons;
     private JButton botonInicio;
 
-    private JLabel labelError1;
-    private JLabel labelError2;
-    private JLabel labelError3;
-
     private VistaMenu()
     {
         //Construccion de la interfaz grafica del menu
@@ -33,14 +29,6 @@ public class VistaMenu extends JFrame implements Observer {
         setSize(800, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        setLabelJugadores();
-        setTextNumJugadores();
-        setLabelBots();
-        setTextNumBots();
-        setLabelPokemons();
-        setTextNumPokemons();
-        setBotonInicio();
 
         titulo = new JTextArea("POKEMON BATTLE ARENA");
 
@@ -104,9 +92,9 @@ public class VistaMenu extends JFrame implements Observer {
                         labels[ite].setForeground(Color.RED);
                     }
                 }
-
             }
             else{
+                //CERRAR LA VENTANA MENU
                 dispose();
             }
         }
@@ -117,102 +105,79 @@ public class VistaMenu extends JFrame implements Observer {
     /**
      * JLabel para el campo de jugadores
      * */
-    private void setLabelJugadores(){
+    public JLabel getLabelJugadores(){
         if(labelJugadores == null){
             this.labelJugadores = new JLabel("Nº Jugadores: ");
             //MODIFICACIONES PARA LA INTERFAZ GRAFICA
         }
+        return labelJugadores;
     }
 
     /**
      * JTextField para el campo jugadores
      * */
-    private void setTextNumJugadores(){
+    public JTextField getTextNumJugadores(){
         if(textNumJugadores == null){
             this.textNumJugadores = new JTextField();
             //MODIFICACIONES PARA LA INTERFAZ GRAFICA
         }
+        return textNumJugadores;
     }
 
     //2
     /**
      * JLabel para el campo de bots
      * */
-    private void setLabelBots(){
+    public JLabel getLabelBots(){
         if(labelBots == null){
             this.labelBots = new JLabel("Nº Bots: ");
             //MODIFICACIONES PARA LA INTERFAZ GRAFICA
         }
+        return labelBots;
     }
 
     /**
      * JTextField para el campo bots
      * */
-    private void setTextNumBots(){
+    public JTextField getTextNumBots(){
         if(textNumBots == null){
             this.textNumBots = new JTextField();
             //MODIFICACIONES PARA LA INTERFAZ GRAFICA
         }
+        return textNumBots;
     }
 
     //3
     /**
      * JLabel para el campo de jugadores
      * */
-    private void setLabelPokemons(){
+    public JLabel getLabelPokemons(){
         if(labelPokemons == null){
             this.labelPokemons = new JLabel("Nº Pokemons: ");
             //MODIFICACIONES PARA LA INTERFAZ GRAFICA
         }
+        return labelPokemons;
     }
 
     /**
      * JTextField para el campo jugadores
      * */
-    private void setTextNumPokemons(){
+    public JTextField getTextNumPokemons(){
         if(textNumPokemons == null){
             this.textNumPokemons = new JTextField();
             //MODIFICACIONES PARA LA INTERFAZ GRAFICA
         }
+        return textNumPokemons;
     }
 
     /**
      * BOTON PARA INICIAR LA BATALLA
      * */
-    private void setBotonInicio(){
+    public JButton getBotonInicio(){
         if(botonInicio == null){
             this.botonInicio = new JButton("Iniciar Batalla!");
             //MODIFICACIONES PARA LA INTERFAZ GRAFICA
         }
-    }
-
-    //GETTERS
-
-    public JLabel getLabelJugadores() {
-        return labelJugadores;
-    }
-
-    public JTextField getTextNumJugadores() {
-        return textNumJugadores;
-    }
-
-    public JLabel getLabelBots() {
-        return labelBots;
-    }
-
-    public JTextField getTextNumBots() {
-        return textNumBots;
-    }
-
-    public JLabel getLabelPokemons() {
-        return labelPokemons;
-    }
-
-    public JTextField getTextNumPokemons() {
-        return textNumPokemons;
-    }
-
-    public JButton getBotonInicio() {
         return botonInicio;
     }
 }

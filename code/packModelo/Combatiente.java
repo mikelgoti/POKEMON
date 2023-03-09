@@ -1,6 +1,8 @@
 package packModelo;
 
-public abstract class Combatiente {
+import java.util.Observable;
+
+public abstract class Combatiente extends Observable {
     public ListaPokemons listaPokemons;
     public int TOTAL_POKEMONS;
     public String nombre;
@@ -14,13 +16,21 @@ public abstract class Combatiente {
         this.esTurno = esTurno;
     }
 
+    @Override
+    public String toString() {
+        return "Combatiente{" +
+                "nombre='" + nombre + '\'' +
+                ", esTurno=" + esTurno +
+                '}';
+    }
+
     public abstract void atacar();
 
-    public ListaPokemons getListaCombatientes() {
+    public ListaPokemons getListaPokemons() {
         return this.listaPokemons;
     }
 
-    public void setListaCombatientes(ListaPokemons listaPokemons) {
+    public void setListaPokemons(ListaPokemons listaPokemons) {
         this.listaPokemons = listaPokemons;
     }
 

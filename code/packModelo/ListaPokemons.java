@@ -1,38 +1,27 @@
 package packModelo;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class ListaPokemons {
-    private ArrayList<Pokemon> listaPokemons;
-    private int numPokemons;
-    public ListaPokemons()
-    {
-        listaPokemons = new ArrayList<>();
-
+    private Pokemon listaPokemons[];
+    private ColeccionPokemons coleccionPokemons;
+    public ListaPokemons(int numPokemons) {
+        coleccionPokemons = new ColeccionPokemons();
+        Random r = new Random();
+        listaPokemons = new Pokemon[numPokemons];
+        for (int ite = 0; ite < numPokemons; ite++) {
+            listaPokemons[ite] = new Pokemon(coleccionPokemons.obtenerNombre(), coleccionPokemons.obtenerTipo(), r.nextInt(10), r.nextInt(20), r.nextInt(71) + 30);
+        }
     }
 
-    public void agregarPokemon(){
+    public Pokemon [] obtenerListaPokemons(){
+        return this.listaPokemons;
+    }
+    public void agregarPokemon() {
 
     }
-
-    public void eliminarPokemon(){
+    public void eliminarPokemon() {
 
     }
-
-    public ArrayList<Pokemon> getListaPokemons() {
-        return listaPokemons;
-    }
-
-    public void setListaPokemons(ArrayList<Pokemon> listaPokemons) {
-        this.listaPokemons = listaPokemons;
-    }
-
-    public int getNumPokemons() {
-        return numPokemons;
-    }
-
-    public void setNumPokemons(int numPokemons) {
-        this.numPokemons = numPokemons;
-    }
-
 }
