@@ -72,7 +72,7 @@ public class ListaCombatientes {
     public void eliminarCombatiente(){
 
     }
-    public Combatiente obtenerCombatiente(){
+    public Combatiente asignarTurno(){
         Random r = new Random();
         return listaCombatientes[r.nextInt(TOTAL_COMBATIENTES)];
     }

@@ -56,7 +56,7 @@ public class ModeloMenu extends Observable{
             ModeloBatalla batalla = ModeloBatalla.getModeloBatalla(numJugadores, numBots, numPokemons);
             setChanged();
             notifyObservers();
-            //batalla.iniciarBatalla();
+            batalla.iniciarBatalla();
         }
         else{
             setChanged();
