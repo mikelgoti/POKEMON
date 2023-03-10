@@ -1,21 +1,24 @@
 package packVista;
 import packControlador.ControladorPokemon;
 import packModelo.Combatiente;
-import packModelo.Jugador;
+import packModelo.ModeloBatalla;
 import packModelo.Pokemon;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Observable;
+import java.util.Observer;
 
-public class VistaJugador {
+public class VistaCombatiente implements Observer {
 
     private Combatiente combatiente;
     private JLabel labelJugador;
-    public VistaJugador(Combatiente combatiente, ControladorPokemon controladorPokemon)
+    private JFrame frame;
+    public VistaCombatiente(Combatiente combatiente, ControladorPokemon controladorPokemon)
     {
         this.combatiente = combatiente;
 
-        JFrame frame = new JFrame();
+        frame = new JFrame();
         frame.setTitle("COMBATIENTE");
         frame.setSize(500, 500);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -26,8 +29,10 @@ public class VistaJugador {
 
         JPanel panelPokemons = new JPanel(new FlowLayout());
 
-        for (Pokemon p : VistaJugador.this.combatiente.getListaPokemons().obtenerListaPokemons()) {
+        for (Pokemon p : VistaCombatiente.this.combatiente.getListaPokemons().obtenerListaPokemons()) {
             VistaPokemon vistaPokemon = new VistaPokemon(p, controladorPokemon);
+            p.addObserver(vistaPokemon);
+
             JPanel panelPokemon = vistaPokemon.crearPanelPokemon();
             panelPokemons.add(panelPokemon);
         }
@@ -46,4 +51,21 @@ public class VistaJugador {
         return labelJugador;
     }
 
+    @SuppressWarnings("deprecated")
+    @Override
+    public void update(Observable o, Object arg) {
+        if(o instanceof ModeloBatalla){
+            if(arg instanceof Combatiente){
+                Combatiente c = (Combatiente) arg;
+                if(c.equals(this.combatiente)){
+                    if(c.esTurno){
+                        this.frame.getRootPane().setBorder(BorderFactory.createLineBorder(Color.RED));
+                    }
+                    else{
+                        this.frame.getRootPane().setBorder(BorderFactory.createEmptyBorder());
+                    }
+                }
+            }
+        }
+    }
 }

@@ -3,12 +3,12 @@ package packModelo;
 import java.util.Observable;
 
 public class Pokemon extends Observable {
-
     private String nombre;
     private String tipo;
     private int ataque;
     private int defensa;
     private int vida;
+    private boolean haAtacado;
 
     public Pokemon(String nombre, String tipo, int ataque, int defensa, int vida) {
         this.nombre = nombre;
@@ -16,6 +16,7 @@ public class Pokemon extends Observable {
         this.ataque = ataque;
         this.defensa = defensa;
         this.vida = vida;
+        this.haAtacado = false;
     }
 
     @Override
@@ -30,11 +31,22 @@ public class Pokemon extends Observable {
     }
 
     public void atacar(Pokemon pokemon){
+        System.out.println("");
+        System.out.println(this.nombre+" con "+this.getAtaque()+" ataque esta atacando a "+pokemon.nombre+" con "+pokemon.getVida()+" de vida");
+        pokemon.setVida(pokemon.getVida()-this.ataque);
+        System.out.println("Despues del ataque "+pokemon.nombre+" tiene "+pokemon.getVida()+ " vida");
+        this.setHaAtacado(true);
 
+        pokemon.actualizarVista();
     }
 
     public void recibirAtaque(Pokemon pokemon){
         
+    }
+
+    public void actualizarVista(){
+        setChanged();
+        notifyObservers(getVida());
     }
 
     public String getNombre() {
@@ -75,5 +87,13 @@ public class Pokemon extends Observable {
 
     public void setVida(int vida) {
         this.vida = vida;
+    }
+
+    public boolean getHaAtacado() {
+        return haAtacado;
+    }
+
+    public void setHaAtacado(boolean haAtacado) {
+        this.haAtacado = haAtacado;
     }
 }

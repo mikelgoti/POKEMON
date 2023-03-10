@@ -1,16 +1,19 @@
 package packModelo;
 
 import packControlador.ControladorPokemon;
-import packVista.VistaJugador;
+import packVista.VistaCombatiente;
 
-import java.util.Scanner;
+import java.util.Observable;
 
-public class ModeloBatalla {
+@SuppressWarnings("deprecated")
+public class ModeloBatalla extends Observable {
     private static ModeloBatalla modeloBatalla;
     private ListaCombatientes listaCombatientes;
     private int numJugadores;
     private int numBots;
     private int numPokemons;
+
+    private Turno turno;
 
     private ModeloBatalla(int numJugadores, int numBots, int numPokemons) {
         this.numJugadores = numJugadores;
@@ -21,7 +24,7 @@ public class ModeloBatalla {
         listaCombatientes = ListaCombatientes.getMiListaCombatientes(numJugadores, numBots, numPokemons);
 
         //Controlador para TODOS LOS POKEMONS
-        ControladorPokemon controladorPokemon = ControladorPokemon.getMiControladorPokemon();
+        //ControladorPokemon controladorPokemon = ControladorPokemon.getMiControladorPokemon();
         /*if(c instanceof Jugador){
                 Jugador j = (Jugador) c;
                 VistaJugador vistaJugador = new VistaJugador(j, controladorPokemon);
@@ -30,11 +33,6 @@ public class ModeloBatalla {
                 Bot b = (Bot) c;
                 VistaJugador vistaBot = new VistaJugador(b, controladorPokemon);
             }*/
-
-        //GENERAR SUS VENTANAS
-        for(Combatiente c : listaCombatientes.getListaCombatientes()){
-            VistaJugador vistaJugador = new VistaJugador(c, controladorPokemon);
-        }
     }
 
     public static ModeloBatalla getModeloBatalla(int numJugadores, int numBots, int numPokemons){
@@ -44,6 +42,11 @@ public class ModeloBatalla {
         return modeloBatalla;
     }
     public void iniciarBatalla(){
+        ControladorPokemon controladorPokemon = ControladorPokemon.getMiControladorPokemon(modeloBatalla);
+        for(Combatiente c : listaCombatientes.getListaCombatientes()){
+            VistaCombatiente vistaCombatiente = new VistaCombatiente(c, controladorPokemon);
+            modeloBatalla.addObserver(vistaCombatiente);
+        }
         System.out.println("Iniciando batalla");
         Thread batallaThread = new Thread(new Runnable() {
             @Override
@@ -52,11 +55,30 @@ public class ModeloBatalla {
                 // Aquí va la lógica de la batalla
                 while(true){
                     Combatiente combatiente = listaCombatientes.asignarTurno();
-                    System.out.println(combatiente);
-                    new Scanner(System.in).next();
+                    combatiente.esTurno = true;
+                    turno = new Turno(combatiente);
+                    actualizarObservadores(combatiente);
+                    while(!turno.isTurnoTerminado()){
+                        //El jugador ataca
+                    }
+                    combatiente.esTurno = false;
+                    actualizarObservadores(combatiente);
                 }
             }
         });
         batallaThread.start();
+    }
+
+    public void setTurnoAtacanteObjetivo(){
+
+    }
+
+    public void actualizarObservadores(Combatiente combatiente){
+        setChanged();
+        notifyObservers(combatiente);
+    }
+
+    public Turno getTurno(){
+        return this.turno;
     }
 }

@@ -8,23 +8,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
-public class VistaPokemon {
+public class VistaPokemon implements Observer {
     private Pokemon pokemon;
-
     private ControladorPokemon controladorPokemon;
-
     private JLabel labelNombre;
     private JLabel labelTipo;
     private JLabel labelAtaque;
     private JLabel labelDefensa;
     private JLabel labelVida;
-
     private JButton botonAtacar;
-
-    private Pokemon pokemonAtacante;
-
-    private Pokemon pokemonObjetivo;
 
     public VistaPokemon(Pokemon pokemon, ControladorPokemon controladorPokemon)
     {
@@ -42,14 +37,19 @@ public class VistaPokemon {
         panelPokemon.add(getLabelVida());
         panelPokemon.add(getBotonAtacar());
 
-        getBotonAtacar().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //pokemonAtacante = getBotonAtacar()
-            }
-        });
+        controladorPokemon.setVistaPokemon(this);
 
         return panelPokemon;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if(o instanceof Pokemon){
+            if(arg instanceof Integer){
+                int vidaDespuesDelAtaque = (int) arg;
+                getLabelVida().setText(String.valueOf(vidaDespuesDelAtaque));
+            }
+        }
     }
 
     /**
@@ -108,4 +108,6 @@ public class VistaPokemon {
     public void setPokemon(Pokemon pokemon) {
         this.pokemon = pokemon;
     }
+
+
 }
