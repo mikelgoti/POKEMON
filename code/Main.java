@@ -3,13 +3,12 @@ import packModelo.ModeloMenu;
 import packVista.VistaMenu;
 
 public class Main {
-
     public static void main(String[] args) {
-        ModeloMenu mm = ModeloMenu.getMiModeloMenu();
+        ModeloMenu mm = new ModeloMenu();
 
-        VistaMenu vm = VistaMenu.getVistaMenu();
+        VistaMenu vm = new VistaMenu();
 
-        ControladorMenu cm = ControladorMenu.getMiControladorMenu();
+        ControladorMenu.getMiControladorMenu(vm, mm);
 
         mm.addObserver(vm);
 

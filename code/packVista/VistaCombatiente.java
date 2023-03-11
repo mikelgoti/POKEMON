@@ -1,16 +1,14 @@
 package packVista;
+
 import packControlador.ControladorPokemon;
 import packModelo.Combatiente;
-import packModelo.ModeloBatalla;
 import packModelo.Pokemon;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
-
 public class VistaCombatiente implements Observer {
-
     private Combatiente combatiente;
     private JLabel labelJugador;
     private JFrame frame;
@@ -51,19 +49,21 @@ public class VistaCombatiente implements Observer {
         return labelJugador;
     }
 
+    public Combatiente getCombatiente() {
+        return combatiente;
+    }
+
     @SuppressWarnings("deprecated")
     @Override
     public void update(Observable o, Object arg) {
-        if(o instanceof ModeloBatalla){
-            if(arg instanceof Combatiente){
-                Combatiente c = (Combatiente) arg;
-                if(c.equals(this.combatiente)){
-                    if(c.esTurno){
-                        this.frame.getRootPane().setBorder(BorderFactory.createLineBorder(Color.RED));
-                    }
-                    else{
-                        this.frame.getRootPane().setBorder(BorderFactory.createEmptyBorder());
-                    }
+        if(o instanceof Combatiente){
+            if(arg instanceof Boolean){
+                boolean esTurno = (boolean) arg;
+                if(esTurno){
+                    this.frame.getRootPane().setBorder(BorderFactory.createLineBorder(Color.RED));
+                }
+                else{
+                    this.frame.getRootPane().setBorder(BorderFactory.createEmptyBorder());
                 }
             }
         }

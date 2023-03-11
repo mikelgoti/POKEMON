@@ -2,12 +2,20 @@ package packModelo;
 
 import java.util.Observable;
 
+/**
+ * SUPERCLASE PARA REPRESENTAR A UN COMBATIENTE.
+ * Los combatientes pueden ser jugadores o bots.
+ * Los atributos son provisionales hay que definir unos mejores.
+ */
 public abstract class Combatiente extends Observable {
-    public ListaPokemons listaPokemons;
-    public int TOTAL_POKEMONS;
-    public String nombre;
-    public boolean esTurno;
+    private ListaPokemons listaPokemons;
+    private int TOTAL_POKEMONS;
+    private String nombre;
+    private boolean esTurno;
 
+    /**
+     * CONSTRUCTOR DE LA SUPERCLASE
+     * */
     public Combatiente(int TOTAL_POKEMONS, String nombre, boolean esTurno, ListaPokemons listaPokemons)
     {
         this.listaPokemons = listaPokemons;
@@ -15,43 +23,22 @@ public abstract class Combatiente extends Observable {
         this.nombre = nombre;
         this.esTurno = esTurno;
     }
-
-    @Override
-    public String toString() {
-        return "Combatiente{" +
-                "nombre='" + nombre + '\'' +
-                ", esTurno=" + esTurno +
-                '}';
-    }
-
     public abstract void atacar();
+
+    /**
+     * Aqui se podria definir otro metodo abstracto que se llame actualizar vista del combatiente.
+     * */
+    public void actualizarVista(){
+        setChanged();
+        notifyObservers(esTurno);
+    }
 
     public ListaPokemons getListaPokemons() {
         return this.listaPokemons;
     }
 
-    public void setListaPokemons(ListaPokemons listaPokemons) {
-        this.listaPokemons = listaPokemons;
-    }
-
-    public int getTOTAL_POKEMONS() {
-        return TOTAL_POKEMONS;
-    }
-
-    public void setTOTAL_POKEMONS(int TOTAL_POKEMONS) {
-        this.TOTAL_POKEMONS = TOTAL_POKEMONS;
-    }
-
     public String getNombre() {
         return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public boolean isEsTurno() {
-        return esTurno;
     }
 
     public void setEsTurno(boolean esTurno) {

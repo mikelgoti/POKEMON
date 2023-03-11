@@ -6,19 +6,13 @@ public class ModeloMenu extends Observable{
     /**
      * VARIABLES DE CLASE
      * */
-    private static ModeloMenu miModeloMenu = null;
     private int numJugadores;
     private boolean jugadoresBien = true;
     private int numBots;
     private boolean botsBien = true;
     private int numPokemons;
     private boolean pokemonsBien = true;
-    private boolean datosCorrectos = true;
-
-    /**
-     * CONSTRUCTOR PRIVADO => PATRON SINGLETON
-     * */
-    private ModeloMenu() {}
+    public ModeloMenu() {}
 
     /**
      * METODOS PRIVADOS
@@ -36,27 +30,12 @@ public class ModeloMenu extends Observable{
             return 0;
         }
     }
-
-    /**
-     * METODOS PUBLICOS
-     * */
-
-    /**
-     * Metodo para crear una unica instancia si no se a creado y obtenerla.
-     * */
-    public static ModeloMenu getMiModeloMenu()
-    {
-        if(miModeloMenu == null){
-            miModeloMenu = new ModeloMenu();
-        }
-        return miModeloMenu;
-    }
     public void comprobarInputs(){
         if(jugadoresBien && botsBien && pokemonsBien){
-            ModeloBatalla batalla = ModeloBatalla.getModeloBatalla(numJugadores, numBots, numPokemons);
+            ModeloBatalla modeloBatalla = ModeloBatalla.getModeloBatalla(numJugadores, numBots, numPokemons);
             setChanged();
             notifyObservers();
-            batalla.iniciarBatalla();
+            modeloBatalla.iniciarBatalla();
         }
         else{
             setChanged();
@@ -65,32 +44,19 @@ public class ModeloMenu extends Observable{
     }
 
     /**
-     * GETTERS & SETTERS
+     * SETTERS
      * */
-    public int getNumJugadores() {
-        return numJugadores;
-    }
-
     public void setNumJugadores(String numJugadores) {
         this.numJugadores = obtenerEntero(numJugadores);
-        this.jugadoresBien = this.numJugadores > 0 && this.numJugadores <= 6 ? true : false;
+        this.jugadoresBien = this.numJugadores > -1 && this.numJugadores <= 6 ? true : false;
     }
-
-    public int getNumBots() {
-        return numBots;
-    }
-
     public void setNumBots(String numBots) {
         this.numBots = obtenerEntero(numBots);
-        this.botsBien = this.numBots > 0 && this.numBots <= 6 ? true : false;
+        this.botsBien = this.numBots > -1 && this.numBots <= 6 ? true : false;
     }
-
-    public int getNumPokemons() {
-        return numPokemons;
-    }
-
     public void setNumPokemons(String numPokemons) {
         this.numPokemons = obtenerEntero(numPokemons);
-        this.pokemonsBien = this.numPokemons > 0 && this.numPokemons <= 6 ? true : false;
+        this.pokemonsBien = this.numPokemons > -1 && this.numPokemons <= 6 ? true : false;
     }
+
 }

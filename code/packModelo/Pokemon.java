@@ -2,6 +2,9 @@ package packModelo;
 
 import java.util.Observable;
 
+/**
+ * CLASE QUE REPRESENTA UN OBJETO POKEMON
+ * */
 public class Pokemon extends Observable {
     private String nombre;
     private String tipo;
@@ -10,6 +13,9 @@ public class Pokemon extends Observable {
     private int vida;
     private boolean haAtacado;
 
+    /**
+     * CONSTRUCTOR DE LA CLASE POKEMON
+     * */
     public Pokemon(String nombre, String tipo, int ataque, int defensa, int vida) {
         this.nombre = nombre;
         this.tipo = tipo;
@@ -19,31 +25,21 @@ public class Pokemon extends Observable {
         this.haAtacado = false;
     }
 
-    @Override
-    public String toString() {
-        return "Pokemon{" +
-                "nombre='" + nombre + '\'' +
-                ", tipo='" + tipo + '\'' +
-                ", ataque=" + ataque +
-                ", defensa=" + defensa +
-                ", vida=" + vida +
-                '}';
-    }
-
+    /**
+     * METODO ATACAR
+     * El pokemon de esta instancia ataca al pokemon que se recibe como parametro.
+     * Al atacar se resta la vida del pokemon que a sido atacado.
+     * El pokemon atacante se asigna como que ya a atacado.
+     * y se actualiza la vista del pokemon atacado.
+     * */
     public void atacar(Pokemon pokemon){
-        System.out.println("");
-        System.out.println(this.nombre+" con "+this.getAtaque()+" ataque esta atacando a "+pokemon.nombre+" con "+pokemon.getVida()+" de vida");
+        //System.out.println(this.nombre+" con "+this.getAtaque()+" ataque esta atacando a "+pokemon.nombre+" con "+pokemon.getVida()+" de vida");
         pokemon.setVida(pokemon.getVida()-this.ataque);
-        System.out.println("Despues del ataque "+pokemon.nombre+" tiene "+pokemon.getVida()+ " vida");
+        //System.out.println("Despues del ataque "+pokemon.nombre+" tiene "+pokemon.getVida()+ " vida");
         this.setHaAtacado(true);
 
         pokemon.actualizarVista();
     }
-
-    public void recibirAtaque(Pokemon pokemon){
-        
-    }
-
     public void actualizarVista(){
         setChanged();
         notifyObservers(getVida());

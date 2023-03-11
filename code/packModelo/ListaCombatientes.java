@@ -50,14 +50,14 @@ public class ListaCombatientes {
             if(c instanceof Jugador){
                 Jugador j = (Jugador) c;
                 sb.append(j.toString()).append("\n");
-                for (Pokemon p : j.listaPokemons.obtenerListaPokemons()) {
+                for (Pokemon p : j.getListaPokemons().obtenerListaPokemons()) {
                     sb.append(p.toString()).append("\n");
                 }
                 sb.append("\n");
             } else if(c instanceof Bot) {
                 Bot b = (Bot) c;
                 sb.append(b.toString()).append("\n");
-                for (Pokemon p : b.listaPokemons.obtenerListaPokemons()) {
+                for (Pokemon p : b.getListaPokemons().obtenerListaPokemons()) {
                     sb.append(p.toString()).append("\n");
                 }
                 sb.append("\n");

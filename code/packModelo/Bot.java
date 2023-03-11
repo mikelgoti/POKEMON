@@ -1,7 +1,8 @@
 package packModelo;
 
-import java.util.List;
-
+/**
+ * CLASE HIJA DE COMBATIENTE
+ * */
 public class Bot extends Combatiente{
     public Bot(int TOTAL_POKEMONS, String nombre, boolean esTurno, ListaPokemons listaPokemons)
     {

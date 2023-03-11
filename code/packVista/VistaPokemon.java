@@ -2,12 +2,8 @@ package packVista;
 
 import packControlador.ControladorPokemon;
 import packModelo.Pokemon;
-
-import javax.naming.ldap.Control;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 

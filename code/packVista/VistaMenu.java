@@ -1,18 +1,12 @@
 package packVista;
 
-import packControlador.ControladorMenu;
 import packModelo.ModeloMenu;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
 public class VistaMenu extends JFrame implements Observer {
-
-    //private static ControladorMenu controladorMenu = null;
-    private static VistaMenu vistaMenu = null;
-
     private JTextArea titulo;
     private JLabel labelJugadores;
     private JTextField textNumJugadores;
@@ -21,8 +15,7 @@ public class VistaMenu extends JFrame implements Observer {
     private JLabel labelPokemons;
     private JTextField  textNumPokemons;
     private JButton botonInicio;
-
-    private VistaMenu()
+    public VistaMenu()
     {
         //Construccion de la interfaz grafica del menu
         setTitle("Pokemon Battle");
@@ -52,17 +45,6 @@ public class VistaMenu extends JFrame implements Observer {
         getContentPane().add(titulo, BorderLayout.CENTER);
 
         setVisible(true);
-    }
-
-    public static VistaMenu getVistaMenu(){
-        if(vistaMenu == null){
-            vistaMenu = new VistaMenu();
-        }
-        return vistaMenu;
-    }
-
-    private void mostrarErrorInput(String frase){
-
     }
 
     @Override

@@ -1,45 +1,35 @@
 package packControlador;
 import packModelo.ModeloMenu;
 import packVista.VistaMenu;
-
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ControladorMenu {
-
     /**
-     * INSTANCIAS DEL MODELO MVC => VISTA Y MODELO
+     * CLASE PARA GESTIONAR=> VistaMenu Y ModeloMenu
      * */
     private static ControladorMenu miControladorMenu;
-    private static VistaMenu vistaMenu;
-    private static ModeloMenu modeloMenu;
+    private VistaMenu vistaMenu;
+    private ModeloMenu modeloMenu;
 
     /**
-     * CONSTRUCTOR DEL CONTROLADOR PARA EL MENU
+     * CONSTRUCTOR DEL ControladorMenu
      * */
-    public ControladorMenu() {
-        this.vistaMenu = VistaMenu.getVistaMenu();
-        this.modeloMenu = ModeloMenu.getMiModeloMenu();
+    public ControladorMenu(VistaMenu vistaMenu, ModeloMenu modeloMenu) {
+        this.vistaMenu = vistaMenu;
+        this.modeloMenu = modeloMenu;
 
-           vistaMenu.getBotonInicio().addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    /*System.out.printf("Jugadores: %s\n" +
-                            "Bots: %s\n" +
-                            "Pokemons: %s",j,b,p);*/
-                    ModeloMenu menu = ModeloMenu.getMiModeloMenu();
-                    menu.setNumJugadores(vistaMenu.getTextNumJugadores().getText());
-                    menu.setNumBots(vistaMenu.getTextNumBots().getText());
-                    menu.setNumPokemons(vistaMenu.getTextNumPokemons().getText());
-                    menu.comprobarInputs();
-                }
-            });
+           vistaMenu.getBotonInicio().addActionListener(e -> {
+               modeloMenu.setNumJugadores(vistaMenu.getTextNumJugadores().getText());
+               modeloMenu.setNumBots(vistaMenu.getTextNumBots().getText());
+               modeloMenu.setNumPokemons(vistaMenu.getTextNumPokemons().getText());
+               modeloMenu.comprobarInputs();
+           });
     }
 
-    public static ControladorMenu getMiControladorMenu(){
+    public static ControladorMenu getMiControladorMenu(VistaMenu vm, ModeloMenu mm){
         if(miControladorMenu == null){
-            miControladorMenu = new ControladorMenu();
+            miControladorMenu = new ControladorMenu(vm, mm);
         }
         return miControladorMenu;
     }

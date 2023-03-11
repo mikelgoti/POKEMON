@@ -4,12 +4,6 @@ import packModelo.ModeloBatalla;
 import packModelo.Pokemon;
 import packVista.VistaPokemon;
 
-import javax.naming.ldap.Control;
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.lang.module.ModuleDescriptor;
-
 public class ControladorPokemon {
 
     private static ControladorPokemon miControladorPokemon;
@@ -40,12 +34,6 @@ public class ControladorPokemon {
         });
     }
 
-    /*public void atacar(){
-         pokemonAtacante.atacar(pokemonObjetivo);
-         pokemonAtacante = null;
-         pokemonObjetivo = null;
-    }*/
-
     public void setAtacante(Pokemon pokemon){
         if(pokemonAtacante == null){
             if(modeloBatalla.getTurno().setAtacante(pokemon)){
@@ -55,7 +43,6 @@ public class ControladorPokemon {
         else if(pokemonAtacante != null && pokemonObjetivo == null){
             modeloBatalla.getTurno().setObjetivo(pokemon);
             pokemonAtacante = null;
-            //atacar();
         }
     }
 }

@@ -1,25 +1,30 @@
 package packModelo;
 
 public class Turno {
-
     private Combatiente combatiente;
     private Pokemon atacante;
     private Pokemon objetivo;
     private boolean turnoTerminado;
-    private int totalPokemons;
-
     private boolean hanAtacadoTodos;
+    private ModeloBatalla modeloBatalla;
 
-    public Turno(Combatiente combatiente)
+    /**
+     * CONSTRUCTOR DE TURNO
+     * */
+    public Turno(Combatiente combatiente, ModeloBatalla modeloBatalla)
     {
         this.combatiente = combatiente;
         turnoTerminado = false;
         hanAtacadoTodos = false;
-
-        this.totalPokemons = this.combatiente.getListaPokemons().obtenerListaPokemons().length;
-
+        this.modeloBatalla = modeloBatalla;
     }
 
+    /**
+     * Si hay atacante se ataca.
+     * Despues de atacar se comprueba si todos los pokemons del combatiente del turno han atacado.
+     * Si no han atacado todos no se cambia de turno.
+     * Si han atacado todos sus pokemons se cambia de turno.
+     * */
     public void atacar(){
         if(atacante != null){
             atacante.atacar(objetivo);
@@ -36,24 +41,11 @@ public class Turno {
                 for(Pokemon p : combatiente.getListaPokemons().obtenerListaPokemons()){
                     p.setHaAtacado(false);
                 }
-                this.turnoTerminado = true;
+                modeloBatalla.setVariable(true);
             }
         }
         atacante = null;
         objetivo = null;
-    }
-
-
-    public Combatiente getCombatiente() {
-        return combatiente;
-    }
-
-    public void setCombatiente(Combatiente combatiente) {
-        this.combatiente = combatiente;
-    }
-
-    public Pokemon getAtacante() {
-        return atacante;
     }
     public boolean setAtacante(Pokemon pokemon) {
         if(!pokemon.getHaAtacado()){
@@ -65,21 +57,15 @@ public class Turno {
             return false;
         }
     }
-
-    public Pokemon getObjetivo() {
-        return objetivo;
-    }
-
     public void setObjetivo(Pokemon objetivo) {
         this.objetivo = objetivo;
         atacar();
     }
-
     public boolean isTurnoTerminado() {
         return turnoTerminado;
     }
 
-    public void setTurnoTerminado(boolean turnoTerminado) {
+    public void setTurnoTerminado(boolean turnoTerminado){
         this.turnoTerminado = turnoTerminado;
     }
 }
