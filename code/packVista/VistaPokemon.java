@@ -1,7 +1,7 @@
 package packVista;
 
 import packControlador.ControladorPokemon;
-import packModelo.Pokemon;
+import packModelo.packPokemon.Pokemon;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Observable;
@@ -61,7 +61,7 @@ public class VistaPokemon implements Observer {
 
     public JLabel getLabelTipo(){
         if(labelTipo == null){
-            labelTipo = new JLabel(pokemon.getTipo());
+            labelTipo = new JLabel(String.valueOf(pokemon.getTipo()));
             //MODIFICACION DE LA INTERFAZ GRAFICA DEL POKEMON
         }
         return labelTipo;

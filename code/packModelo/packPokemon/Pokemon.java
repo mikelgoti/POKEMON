@@ -1,13 +1,27 @@
-package packModelo;
+package packModelo.packPokemon;
+
+import packUtils.InstanciaRandom;
 
 import java.util.Observable;
+import java.util.Random;
 
 /**
  * CLASE QUE REPRESENTA UN OBJETO POKEMON
  * */
 public class Pokemon extends Observable {
+
+    /**
+     * VARIABLES PARA ACOTAR LA CREACION DE ATRIBUTOS
+     * */
+    private static final int MINIMO_PUNTOS_VIDA = 50;
+    private static final int MAXIMO_PUNTOS_VIDA = 100;
+    private static final int MINIMO_ATAQUE = 10;
+    private static final int MAXIMO_ATAQUE = 50;
+    private static final int MINIMO_DEFENSA = 5;
+    private static final int MAXIMO_DEFENSA = 30;
+
     private String nombre;
-    private String tipo;
+    private PokemonTipo tipo;
     private int ataque;
     private int defensa;
     private int vida;
@@ -16,13 +30,18 @@ public class Pokemon extends Observable {
     /**
      * CONSTRUCTOR DE LA CLASE POKEMON
      * */
-    public Pokemon(String nombre, String tipo, int ataque, int defensa, int vida) {
+    public Pokemon(String nombre, PokemonTipo tipo) {
         this.nombre = nombre;
         this.tipo = tipo;
-        this.ataque = ataque;
-        this.defensa = defensa;
-        this.vida = vida;
+        this.vida = generarAtributo(MINIMO_PUNTOS_VIDA, MAXIMO_PUNTOS_VIDA);
+        this.ataque = generarAtributo(MINIMO_ATAQUE, MAXIMO_ATAQUE);
+        this.defensa = generarAtributo(MINIMO_DEFENSA, MAXIMO_DEFENSA);
+
         this.haAtacado = false;
+    }
+
+    private int generarAtributo(int minimo, int maximo){
+        return InstanciaRandom.getInstanciaRandom().getR().nextInt((maximo - minimo) + 1) + minimo;
     }
 
     /**
@@ -53,11 +72,11 @@ public class Pokemon extends Observable {
         this.nombre = nombre;
     }
 
-    public String getTipo() {
+    public PokemonTipo getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(PokemonTipo tipo) {
         this.tipo = tipo;
     }
 

@@ -1,5 +1,7 @@
 package packModelo;
 
+import packModelo.packPokemon.Pokemon;
+
 import java.util.Observable;
 
 /**
@@ -8,7 +10,7 @@ import java.util.Observable;
  * Los atributos son provisionales hay que definir unos mejores.
  */
 public abstract class Combatiente extends Observable {
-    private ListaPokemons listaPokemons;
+    private Pokemon listaPokemon [];
     private int TOTAL_POKEMONS;
     private String nombre;
     private boolean esTurno;
@@ -16,9 +18,9 @@ public abstract class Combatiente extends Observable {
     /**
      * CONSTRUCTOR DE LA SUPERCLASE
      * */
-    public Combatiente(int TOTAL_POKEMONS, String nombre, boolean esTurno, ListaPokemons listaPokemons)
+    public Combatiente(int TOTAL_POKEMONS, String nombre, boolean esTurno, Pokemon listaPokemon [])
     {
-        this.listaPokemons = listaPokemons;
+        this.listaPokemon = listaPokemon;
         this.TOTAL_POKEMONS = TOTAL_POKEMONS;
         this.nombre = nombre;
         this.esTurno = esTurno;
@@ -33,8 +35,8 @@ public abstract class Combatiente extends Observable {
         notifyObservers(esTurno);
     }
 
-    public ListaPokemons getListaPokemons() {
-        return this.listaPokemons;
+    public Pokemon [] getListaPokemons() {
+        return this.listaPokemon;
     }
 
     public String getNombre() {

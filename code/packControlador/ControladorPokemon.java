@@ -1,7 +1,7 @@
 package packControlador;
 
 import packModelo.ModeloBatalla;
-import packModelo.Pokemon;
+import packModelo.packPokemon.Pokemon;
 import packVista.VistaPokemon;
 
 public class ControladorPokemon {

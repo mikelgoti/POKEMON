@@ -1,5 +1,7 @@
 package packModelo;
 
+import packModelo.packPokemon.Pokemon;
+
 public class Turno {
     private Combatiente combatiente;
     private Pokemon atacante;
@@ -28,7 +30,7 @@ public class Turno {
     public void atacar(){
         if(atacante != null){
             atacante.atacar(objetivo);
-            for(Pokemon p : combatiente.getListaPokemons().obtenerListaPokemons()){
+            for(Pokemon p : combatiente.getListaPokemons()){
                 if(p.getHaAtacado()){
                     hanAtacadoTodos = true;
                 }
@@ -38,7 +40,7 @@ public class Turno {
             }
             if(hanAtacadoTodos){
                 //Al finalizar el turno reiniciamos los ataques de los pokemons.
-                for(Pokemon p : combatiente.getListaPokemons().obtenerListaPokemons()){
+                for(Pokemon p : combatiente.getListaPokemons()){
                     p.setHaAtacado(false);
                 }
                 modeloBatalla.setVariable(true);

@@ -2,7 +2,7 @@ package packVista;
 
 import packControlador.ControladorPokemon;
 import packModelo.Combatiente;
-import packModelo.Pokemon;
+import packModelo.packPokemon.Pokemon;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,7 +27,7 @@ public class VistaCombatiente implements Observer {
 
         JPanel panelPokemons = new JPanel(new FlowLayout());
 
-        for (Pokemon p : VistaCombatiente.this.combatiente.getListaPokemons().obtenerListaPokemons()) {
+        for (Pokemon p : VistaCombatiente.this.combatiente.getListaPokemons()) {
             VistaPokemon vistaPokemon = new VistaPokemon(p, controladorPokemon);
             p.addObserver(vistaPokemon);
 
